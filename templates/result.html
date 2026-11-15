@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Результат</h1>
+
+  {% if error %}
+    <p class="error">{{ error }}</p>
+  {% else %}
+    <p class="summary">
+      Комнат: <strong>{{ rooms|length }}</strong> ·
+      занятий: <strong>{{ total_lessons }}</strong> ·
+      конфликтов: <strong>{{ conflicts|length }}</strong> ·
+      ошибок парсинга: <strong>{{ errors|length }}</strong>
+    </p>
+
+    {% if errors %}
+      <h2>Ошибки парсинга</h2>
+      <ul class="errors">
+        {% for e in errors %}
+          <li>
+            {% if e is mapping %}
+              Строка {{ e.row_number }}: {{ e.message }}
+            {% else %}
+              Строка {{ e.row_number }}: {{ e.message }}
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if conflicts %}
+      <h2>Пересечения</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Комната</th>
+            <th>Занятие A</th>
+            <th>Время A</th>
+            <th>Занятие B</th>
+            <th>Время B</th>
+            <th>Пересечение</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in conflicts %}
+            <tr>
+              <td>{{ c.room_id }}</td>
+              <td>{{ c.first_lesson_id }}</td>
+              <td>
+                {{ c.first_lesson_start.strftime('%d.%m %H:%M') }}–{{ c.first_lesson_end.strftime('%H:%M') }}
+              </td>
+              <td>{{ c.second_lesson_id }}</td>
+              <td>
+                {{ c.second_lesson_start.strftime('%d.%m %H:%M') }}–{{ c.second_lesson_end.strftime('%H:%M') }}
+              </td>
+              <td>{{ c.overlap_seconds }} с</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="ok">Пересечений не найдено.</p>
+    {% endif %}
+  {% endif %}
+
+  <p><a href="{{ url_for('index') }}">← Загрузить другой файл</a></p>
+{% endblock %}

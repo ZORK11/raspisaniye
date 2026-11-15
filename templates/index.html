@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Проверка пересечений занятий</h1>
+
+  <form action="{{ url_for('check') }}" method="post" enctype="multipart/form-data">
+    <label>
+      CSV-файл с занятиями
+      <input type="file" name="file" accept=".csv" required>
+    </label>
+    <button type="submit">Проверить</button>
+  </form>
+
+  <p class="hint">
+    Нет файла? <a href="{{ url_for('sample') }}">Скачать пример</a> ·
+    <a href="/docs#/default/api_check_post_api_check_post">Swagger</a>.
+  </p>
+{% endblock %}
