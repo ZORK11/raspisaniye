@@ -32,6 +32,6 @@ def sample():
     file_path = 'lessons.csv'
     return FileResponse(
         path=file_path,
-        filename="sample.csv",  # Имя файла при скачивании
-        media_type="multipart/form-data"  # MIME-тип
+        filename="sample.csv",
+        media_type="multipart/form-data"
     )
