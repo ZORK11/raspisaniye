@@ -29,7 +29,7 @@ async def check(file: UploadFile,request: Request):
 
 @app.get('/sample.csv')
 def sample():
-    file_path = 'lessons.csv'
+    file_path = 'data/lessons.csv'
     return FileResponse(
         path=file_path,
         filename="sample.csv",
