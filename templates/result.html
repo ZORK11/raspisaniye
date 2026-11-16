@@ -6,10 +6,7 @@
     <p class="error">{{ error }}</p>
   {% else %}
     <p class="summary">
-      Комнат: <strong>{{ rooms|length }}</strong> ·
-      занятий: <strong>{{ total_lessons }}</strong> ·
       конфликтов: <strong>{{ conflicts|length }}</strong> ·
-      ошибок парсинга: <strong>{{ errors|length }}</strong>
     </p>
 
     {% if errors %}
@@ -44,15 +41,15 @@
           {% for c in conflicts %}
             <tr>
               <td>{{ c.room_id }}</td>
-              <td>{{ c.first_lesson_id }}</td>
+              <td>{{ c.first.lesson_id }}</td>
               <td>
-                {{ c.first_lesson_start.strftime('%d.%m %H:%M') }}–{{ c.first_lesson_end.strftime('%H:%M') }}
+                {{ c.first.lesson_start.strftime('%d.%m %H:%M') }}–{{ c.first.lesson_end.strftime('%H:%M') }}
               </td>
-              <td>{{ c.second_lesson_id }}</td>
+              <td>{{ c.second.lesson_id }}</td>
               <td>
-                {{ c.second_lesson_start.strftime('%d.%m %H:%M') }}–{{ c.second_lesson_end.strftime('%H:%M') }}
+                {{ c.second.lesson_start.strftime('%d.%m %H:%M') }}–{{ c.second.lesson_end.strftime('%H:%M') }}
               </td>
-              <td>{{ c.overlap_seconds }} с</td>
+              <td>{{ c.overlap_time }}</td>
             </tr>
           {% endfor %}
         </tbody>
