@@ -22,7 +22,7 @@ def sort_by_start(grouped: dict):
         grouped[_id] = sorted(grouped[_id], key=lambda lesson: lesson.lesson_start)
     return grouped
 
-def find_room_conflict(grouped_data: dict):
+def find_conflict(grouped_data: dict):
     conflicts = []
     sorted_data = sort_by_start(grouped_data)
     for _id in sorted_data:
