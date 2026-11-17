@@ -23,8 +23,8 @@ async def check(file: UploadFile,request: Request):
     with open(destination, "wb") as dest_file:
         dest_file.write(content)
 
-    parsed_file = parse_room_csv(destination)
-    conflicts = find_room_conflict(parsed_file)
+    parsed_file = parse_csv(destination, 'room_id')
+    conflicts = find_conflict(parsed_file)
     return templates.TemplateResponse(request=request, name='result.html', context={'conflicts': conflicts})
 
 @app.get('/sample.csv')
