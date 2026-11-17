@@ -5,11 +5,13 @@ class Lesson:
     lesson_id: int
     lesson_start: datetime
     lesson_end: datetime
+    teacher_id: int
 
-    def __init__(self, lesson_id: int, lesson_start: datetime, lesson_end: datetime):
+    def __init__(self, lesson_id: int, lesson_start: datetime, lesson_end: datetime, teacher_id: int):
         self.lesson_id = lesson_id
         self.lesson_start = lesson_start
         self.lesson_end = lesson_end
+        self.teacher_id = teacher_id
 
 class Conflict:
     room_id: int
